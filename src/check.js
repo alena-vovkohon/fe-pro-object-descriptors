@@ -60,7 +60,7 @@ const objWithProp = {
 const resNext = assignLockedValues(obj, 'name');
 
 console.log(resNext !== objWithProp); // true
-console.log(res.name); // test
+console.log(objWithProp.name); // test
 
 const freezeCheck = { name: 'test' };
 const freezeRes = freezeAllInObject(freezeCheck);
