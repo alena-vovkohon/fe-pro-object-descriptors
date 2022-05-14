@@ -47,23 +47,22 @@ export const isObjectAnyFrozen = (object) => {
  */
 
 export const assignLockedValues = (object, propertyName) => {
-    let prop = Object.getOwnPropertyDescriptors(object)
-    let clon;
+    let clon = Object.assign({}, object)
+    let arr = Object.keys(clon)
 
-    if (prop.value !== propertyName || prop.value === undefined) {
-            clon = Object.assign({}, object)
-            Object.defineProperty(clon, propertyName, {
-                value: null,
-            })
-        } else {
-        clon = Object.assign({}, object)
+    if (!arr.includes(propertyName)) {
         Object.defineProperty(clon, propertyName, {
-                writable: false,
-            } ) 
+            value: null,
+        })
     }
-    
+
+    Object.defineProperty(clon, propertyName, {
+        writable: false,
+    })
     return clon
+    
 };
+
 
 /**
  * Принимает объект и возвращает его копию, только абсолютно замороженную
