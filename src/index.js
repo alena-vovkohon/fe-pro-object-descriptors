@@ -49,18 +49,16 @@ export const isObjectAnyFrozen = (object) => {
 export const assignLockedValues = (object, propertyName) => {
     let clon = Object.assign({}, object)
     let arr = Object.keys(clon)
-
     if (!arr.includes(propertyName)) {
         Object.defineProperty(clon, propertyName, {
             value: null,
         })
-    } else {
-      Object.defineProperty(clon, propertyName, {
+    } 
+
+    Object.defineProperty(clon, propertyName, {
         writable: false,
     })   
-    }
 
-   
     return clon
     
 };
