@@ -11,11 +11,8 @@
 
 export const getKeysByDescriptor = (object, descriptor) => {
     let arr = []
-    let prop = Object.getOwnPropertyDescriptors(object)
-    console.log(prop)
-   
+    let prop = Object.getOwnPropertyDescriptors(object) 
     for (let key in prop) {
-
          if (prop[key][descriptor]) {
              arr.push(key)
          }
@@ -30,7 +27,11 @@ export const getKeysByDescriptor = (object, descriptor) => {
  */
 
 export const isObjectAnyFrozen = (object) => {
-    return Object.isExtensible(object)
+    if (Object.isExtensible(object) === false) {
+        return true
+    } else {
+        return false
+    }
 };
 
 
@@ -54,15 +55,14 @@ export const assignLockedValues = (object, propertyName) => {
             Object.defineProperty(clon, propertyName, {
                 value: null,
             })
-            return clon
         } else {
         clon = Object.assign({}, object)
         Object.defineProperty(clon, propertyName, {
                 writable: false,
-            } )
-            return clon
-        }
-   
+            } ) 
+    }
+    
+    return clon
 };
 
 /**
