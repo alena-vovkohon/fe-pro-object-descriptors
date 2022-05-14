@@ -34,6 +34,7 @@ Object.defineProperties(object, {
   },
 });
 
+
 console.log(getKeysByDescriptor(object, 'writable')); // ['lastName']
 console.log(getKeysByDescriptor(object, 'enumerable')); // ['age']
 console.log(getKeysByDescriptor(object, 'configurable')); // ['checker']

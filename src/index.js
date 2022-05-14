@@ -10,13 +10,17 @@
  */
 
 export const getKeysByDescriptor = (object, descriptor) => {
-  
+    let arr = []
     let prop = Object.getOwnPropertyDescriptors(object)
+    console.log(prop)
+   
     for (let key in prop) {
-        if (prop[key][descriptor]) {
-            return key
-        }
+
+         if (prop[key][descriptor]) {
+             arr.push(key)
+         }
     }
+    return arr
 };
 
 /**
@@ -24,9 +28,11 @@ export const getKeysByDescriptor = (object, descriptor) => {
  * @param {Object} object
  * @returns {boolean}
  */
+
 export const isObjectAnyFrozen = (object) => {
     return Object.isExtensible(object)
 };
+
 
 /**
  * Принимает объект и строку. Мы должны вернуть НОВЫЙ объект(копию оригинального), в котором
