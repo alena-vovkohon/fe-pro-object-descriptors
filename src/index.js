@@ -52,6 +52,9 @@ export const assignLockedValues = (object, propertyName) => {
     if (!arr.includes(propertyName)) {
         Object.defineProperty(clon, propertyName, {
             value: null,
+            writable: false,
+            enumerable: true,
+            configurable: true,
         })
     } 
 
