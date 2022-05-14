@@ -54,11 +54,13 @@ export const assignLockedValues = (object, propertyName) => {
         Object.defineProperty(clon, propertyName, {
             value: null,
         })
+    } else {
+      Object.defineProperty(clon, propertyName, {
+        writable: false,
+    })   
     }
 
-    Object.defineProperty(clon, propertyName, {
-        writable: false,
-    })
+   
     return clon
     
 };
