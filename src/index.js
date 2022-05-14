@@ -10,8 +10,8 @@
  */
 
 export const getKeysByDescriptor = (object, descriptor) => {
-    let arr = []
-    let prop = Object.getOwnPropertyDescriptors(object) 
+    let arr = [];
+    let prop = Object.getOwnPropertyDescriptors(object);
     for (let key in prop) {
          if (prop[key][descriptor]) {
              arr.push(key)
@@ -47,8 +47,8 @@ export const isObjectAnyFrozen = (object) => {
  */
 
 export const assignLockedValues = (object, propertyName) => {
-    let clon = Object.assign({}, object)
-    let arr = Object.keys(clon)
+    let clon = Object.assign({}, object);
+    let arr = Object.keys(clon);
     if (!arr.includes(propertyName)) {
         Object.defineProperty(clon, propertyName, {
             value: null,
@@ -73,9 +73,6 @@ export const assignLockedValues = (object, propertyName) => {
  * @param {Object} object
  * @returns {Object}
  */
-export const freezeAllInObject = (object) => {
-    let clon = Object.freeze(Object.assign({}, object))
-    return clon
-};
+export const freezeAllInObject = (object) => Object.freeze(Object.assign({}, object));
 
 
