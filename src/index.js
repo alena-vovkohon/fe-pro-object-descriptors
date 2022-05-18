@@ -10,14 +10,9 @@
  */
 
 export const getKeysByDescriptor = (object, descriptor) => {
-    let arr = [];
-    let prop = Object.getOwnPropertyDescriptors(object);
-    for (let key in prop) {
-         if (prop[key][descriptor]) {
-             arr.push(key)
-         }
-    }
-    return arr
+     return Object.entries(Object.getOwnPropertyDescriptors(object))
+        .filter(([, value]) => value[descriptor])
+        .map(([item]) => item)
 };
 
 /**
@@ -26,13 +21,7 @@ export const getKeysByDescriptor = (object, descriptor) => {
  * @returns {boolean}
  */
 
-export const isObjectAnyFrozen = (object) => {
-    if (Object.isExtensible(object) === false) {
-        return true
-    } else {
-        return false
-    }
-};
+export const isObjectAnyFrozen = (object) => !Object.isExtensible(object) || Object.isSealed(object) || Object.isFrozen(object)
 
 
 /**
@@ -47,7 +36,7 @@ export const isObjectAnyFrozen = (object) => {
  */
 
 export const assignLockedValues = (object, propertyName) => {
-    let clon = Object.assign({}, object);
+    let clon = { ...object };
     let arr = Object.keys(clon);
     if (!arr.includes(propertyName)) {
         Object.defineProperty(clon, propertyName, {
@@ -60,6 +49,8 @@ export const assignLockedValues = (object, propertyName) => {
 
     Object.defineProperty(clon, propertyName, {
         writable: false,
+        enumerable: true,
+        configurable: true,
     })   
 
     return clon
